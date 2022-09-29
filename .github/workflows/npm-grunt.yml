@@ -1,0 +1,35 @@
+name: NodeJS with Grunt
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      env:
+          # Create and store API_TOKEN_GITHUB in repository
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      run: |
+        npm install
+        grunt hello
+        grunt less
+        grunt babel
+        grunt browserify
+        grunt uglify
