@@ -6,6 +6,8 @@ import $ from "jquery";
 // dotenv.config();
 // console.log(process.env);
 
+console.log(process.env)
+
 var GOOGLE_API_KEY = "";
 var sheet_id = `1-2g3tZj_hjCnSxLquhs3uAAXTm4UZQ8AxDBPCvzKcTE`;
 var baseURL = `https://sheets.googleapis.com/v4/spreadsheets/`;
