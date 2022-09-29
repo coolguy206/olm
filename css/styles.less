@@ -1,0 +1,288 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-variant: small-caps;
+    text-transform: capitalize;
+    margin: 0 0 1vw;
+}
+
+
+
+ul {
+    @media screen and (max-width:428px) {
+        margin: 4vw 0 0;
+        gap: 4vw;
+        padding: 4vw 0 0;
+    }
+
+    margin: 1vw 0;
+    display: flex;
+    flex-wrap:wrap;
+    list-style-type: none;
+    gap: 1vw;
+    border-top: 2px solid #aaabad;
+    padding: 1vw 0 0;
+    display:none;
+
+    li {
+        @media screen and (max-width: 810px) {
+            flex-basis: 49%;
+        }
+
+        @media screen and (max-width: 428px) {
+            flex-basis: 100%;
+            padding: 6vw;
+        }
+
+        border: 1px solid;
+        padding: 1vw;
+        flex-basis: 23%;
+
+        &:nth-of-type(odd) {
+            background: rgba(204, 40, 48, .2);
+        }
+
+        h3 {
+            @media screen and (max-width:1680px) {
+                font-size: 1.5vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                font-size: 2.5vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                font-size: 5vw;
+            }
+
+            font-size: 1vw;
+            font-weight: bold;
+        }
+
+        h4 {
+            @media screen and (max-width:1680px) {
+                font-size: 1vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                font-size: 2vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                font-size: 4vw;
+            }
+
+            font-size: .7vw;
+        }
+    }
+}
+
+header {
+    @media screen and (max-width:428px) {
+        background: linear-gradient(to right, #cc2830, #ff323c, #CC2831);
+        padding: 7vw;
+    }
+
+    position: relative;
+    background: url(https://www.olmbulldogs.com/pics/watermark.png) no-repeat 60vw 0,
+    linear-gradient(to right, #cc2830, #ff323c, #CC2831);
+    padding: 1vw;
+    border-bottom: 8px #c0252d solid;
+
+    div {
+        @media screen and (max-width: 1680px) {
+            max-width: 60vw;
+        }
+
+        @media screen and (max-width: 810px) {
+            max-width: 90vw;
+        }
+
+        @media screen and (max-width:428px) {
+            display: block;
+            text-align: center;
+        }
+
+        max-width: 38vw;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+
+        img {
+            @media screen and (max-width:428px) {
+                width: 40vw;
+            }
+        }
+
+        h1 {
+            @media screen and (max-width:1680px) {
+                font-size: 2.5vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                font-size: 5vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                font-size: 7vw;
+            }
+
+            color: white;
+
+            font-size: 1.7vw;
+
+            text-align: center
+        }
+    }
+}
+
+.wrapper {
+    @media screen and (max-width: 1680px) {
+        // max-width: 1200px;
+        max-width: 90vw;
+    }
+
+    @media screen and (max-width: 428px) {
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    max-width: 1680px;
+    padding: 4vw 5vw;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .5);
+    margin: 4vw auto;
+
+    h1 {
+        @media screen and (max-width:1680px) {
+            font-size: 2.5vw;
+        }
+
+        @media screen and (max-width: 810px) {
+            font-size: 5vw;
+        }
+
+        @media screen and (max-width: 428px) {
+            font-size: 6vw;
+            margin: 0 0 4vw;
+        }
+
+        font-size: 1.7vw;
+
+        color: #cc2830;
+
+
+        margin: 1vw 0;
+    }
+
+    h2 {
+        @media screen and (max-width:1680px) {
+            font-size: 1.5vw;
+        }
+
+        @media screen and (max-width: 810px) {
+            font-size: 3vw;
+        }
+
+        @media screen and (max-width: 428px) {
+            font-size: 5vw;
+            margin: 0 0 4vw;
+        }
+
+        margin: 0 0 1vw;
+
+        font-size: 1vw;
+    }
+
+    form {
+
+        label,
+        input {
+            @media screen and (max-width:1680px) {
+                font-size: 1vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                font-size: 2vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                font-size: 4vw;
+            }
+
+            display: block;
+            padding: 0 0 0 1vw;
+            font-size: .6vw;
+        }
+
+        input {
+            @media screen and (max-width:1680px) {
+                width: 23vw;
+                height: 3vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                width: 43vw;
+                height: 7vw;
+                margin: 0 0 2vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                width: 91vw;
+                height: 12vw;
+                margin: 0 0 4vw;
+            }
+
+            width: 12vw;
+            height: 2vw;
+            margin: 0 0 1vw;
+        }
+
+        button {
+            @media screen and (max-width:1680px) {
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+
+            @media screen and (max-width: 810px) {
+                font-size: 3vw;
+            }
+
+            @media screen and (max-width: 428px) {
+                font-size: 6vw;
+            }
+
+            background: #cc2830;
+            padding: 0.5vw;
+            border: 4px #c0252d solid;
+            color: #fff;
+            font-family: "Cinzel",
+            serif;
+            text-transform: capitalize;
+            font-weight: 400;
+            font-variant: small-caps;
+            font-size: 1vw;
+
+            &:hover {
+                cursor: pointer;
+                background: #fff;
+                color: #cc2830;
+            }
+        }
+    }
+
+}
+
+.error-message {
+    display: none;
+    margin: 1vw 0 !important;
+}
