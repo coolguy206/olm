@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // console.log(process.env);
 // console.log(process.env)
 var GOOGLE_API_KEY = "AIzaSyD-bqqEqVuD1nhHqjozx5VnDAwKMGgpE7c";
-var SIGNUP_GENIUS_KEY = "?user_key=V0FzMkxZcmVOZlVnclZMVEl6dGhWQT09"; //? to test error
+var SIGNUP_GENIUS_KEY = "?user_key=KzhGWmcydml5bFRlTHd6bzc4TWRUdz09"; //? to test error
 // var GOOGLE_API_KEY = "xyz";
 // var SIGNUP_GENIUS_KEY = "xyz";
 
@@ -32,7 +32,8 @@ var message = "";
   fetch("".concat(sGBaseURL).concat(sGSignUps).concat(SIGNUP_GENIUS_KEY)).then(function (data) {
     return data.json();
   }).then(function (data) {
-    // console.log(data);
+    console.log("sign ups");
+    console.log(data);
     data.data.map(function (val, i) {
       // console.log(val);
       var d = val.startdatestring;
@@ -56,9 +57,11 @@ var message = "";
       fetch("".concat(sGBaseURL).concat(sGReports).concat(val.id, "/").concat(SIGNUP_GENIUS_KEY)).then(function (data) {
         return data.json();
       }).then(function (data) {
-        // console.log(`reports`);
-        // console.log(data);
-        // console.log(`signup`);
+        console.log(val.title);
+        console.log("count: ".concat(data.data.signup.length)); // console.log(`reports`);
+
+        console.log(data); // console.log(`signup`);
+
         val.signUps = []; // console.log(val);
 
         data.data.signup.map(function (arr, j) {
@@ -70,7 +73,9 @@ var message = "";
               lastname: arr.lastname,
               phone: arr.phone,
               item: arr.item,
-              comments: arr.comment
+              comments: arr.comment,
+              location: arr.location,
+              qty: arr.myqty
             };
             val.signUps.push(obj);
           }
@@ -88,8 +93,8 @@ var message = "";
     fetch("".concat(baseURL).concat(sheet_id, "?key=").concat(GOOGLE_API_KEY, "&includeGridData=true")).then(function (data) {
       return data.json();
     }).then(function (data) {
-      console.log("google sheets");
-      console.log(data);
+      // console.log(`google sheets`);
+      // console.log(data);
       data.sheets.map(function (val, i) {
         var obj = {
           title: val.properties.title,
@@ -144,9 +149,14 @@ var message = "";
           var theEventImg = val.img;
           val.signUps.map(function (arr, j) {
             var thisEmail = arr.email.toLowerCase();
+            var thisPhone = arr.phone;
+
+            if (thisPhone == undefined) {
+              thisPhone = "";
+            }
 
             if (thisEmail == theEmail1 || thisEmail == theEmail2) {
-              var elem = "<li>\n                        <a href=\"".concat(theEventURL, "\" target=\"_blank\">\n                            <img src=\"").concat(theEventImg, "\" alt=\"").concat(theEvent, "\">\n                            <h3>").concat(theEvent, "</h3>\n                        </a>\n                        <h4>Email: ").concat(arr.email, "</h4>\n                        <h4>Name: ").concat(arr.firstname, " ").concat(arr.lastname, "</h4>\n                        <h4>Amount Paid: ").concat(arr.amountpaid, "</h4>\n                        <h4>Item: ").concat(arr.item, "</h4>\n                        <h4>Comments: ").concat(arr.comments, "</h4>\n                        <h4>Phone: ").concat(arr.phone, "</h4>\n                        <!-- <h4>Child: ").concat(arr.kidname, "</h4>\n                        <h4>Grade: ").concat(arr.grade, "</h4>\n                        <h4>Date: ").concat(arr.date, "</h4> -->\n                    </li>");
+              var elem = "<li>\n                        <a href=\"".concat(theEventURL, "\" target=\"_blank\">\n                            <img src=\"").concat(theEventImg, "\" alt=\"").concat(theEvent, "\">\n                            <h3 class=\"event-title\">").concat(theEvent, "</h3>\n                        </a>\n                        <h4>Email: ").concat(arr.email, "</h4>\n                        <h4>Name: ").concat(arr.firstname, " ").concat(arr.lastname, "</h4>\n                        <h4>Phone: ").concat(thisPhone, "</h4>\n                        <!--<h4>Amount Paid: ").concat(arr.amountpaid, "</h4>-->\n                        <h4 class=\"item\">Item: ").concat(arr.item, "</h4>\n                        <h4 class=\"location\">Location: ").concat(arr.location, "</h4>\n                        <h4>Qty: ").concat(arr.qty, "</h4>\n                        <h4>Comments: ").concat(arr.comments, "</h4>\n                        \n                        <!-- <h4>Child: ").concat(arr.kidname, "</h4>\n                        <h4>Grade: ").concat(arr.grade, "</h4>\n                        <h4>Date: ").concat(arr.date, "</h4> -->\n                    </li>");
               message += elem;
             }
           });
@@ -188,7 +198,31 @@ var message = "";
             (0, _jquery["default"])(titles[i + 1]).closest('li').addClass('duplicate');
             (0, _jquery["default"])(titles[i]).closest('li').addClass('duplicate');
           }
-        }
+        } //! add up total points
+
+
+        var locationsArr = (0, _jquery["default"])('.location');
+        var itemsArr = (0, _jquery["default"])('.item');
+        console.log(locationsArr, itemsArr);
+        var pointsCount = [];
+        locationsArr.map(function (i, val) {
+          // console.log(val);
+          console.log(val.textContent);
+
+          if (val.textContent.indexOf('pts') !== -1) {
+            pointsCount.push(val.textContent);
+          }
+        });
+        itemsArr.map(function (i, val) {
+          // console.log(val);
+          console.log(val.textContent);
+
+          if (val.textContent.indexOf('pts') !== -1) {
+            pointsCount.push(val.textContent);
+          }
+        });
+        console.log("pointsCount");
+        console.log(pointsCount);
       }
     });
   })["catch"](function (err) {

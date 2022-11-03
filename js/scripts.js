@@ -9,7 +9,7 @@ import $ from "jquery";
 // console.log(process.env)
 
 var GOOGLE_API_KEY = "AIzaSyD-bqqEqVuD1nhHqjozx5VnDAwKMGgpE7c";
-var SIGNUP_GENIUS_KEY = `?user_key=V0FzMkxZcmVOZlVnclZMVEl6dGhWQT09`;
+var SIGNUP_GENIUS_KEY = `?user_key=KzhGWmcydml5bFRlTHd6bzc4TWRUdz09`;
 
 //? to test error
 // var GOOGLE_API_KEY = "xyz";
@@ -36,7 +36,8 @@ $(document).ready(function () {
 
     //? GET SIGNUPS FROM SIGNUP GENIUS
     fetch(`${sGBaseURL}${sGSignUps}${SIGNUP_GENIUS_KEY}`).then((data) => { return data.json() }).then((data) => {
-        // console.log(data);
+        console.log(`sign ups`);
+        console.log(data);
 
         data.data.map((val, i) => {
             // console.log(val);
@@ -63,8 +64,10 @@ $(document).ready(function () {
     }).then((signUpArr) => {
         signUpArr.genius.map((val, i) => {
             fetch(`${sGBaseURL}${sGReports}${val.id}/${SIGNUP_GENIUS_KEY}`).then((data) => { return data.json() }).then((data) => {
+                console.log(val.title);
+                console.log(`count: ${data.data.signup.length}`)
                 // console.log(`reports`);
-                // console.log(data);
+                console.log(data);
                 // console.log(`signup`);
 
                 val.signUps = [];
@@ -78,7 +81,9 @@ $(document).ready(function () {
                             lastname: arr.lastname,
                             phone: arr.phone,
                             item: arr.item,
-                            comments: arr.comment
+                            comments: arr.comment,
+                            location: arr.location,
+                            qty: arr.myqty
                         }
                         val.signUps.push(obj);
                     }
@@ -99,8 +104,8 @@ $(document).ready(function () {
         //? GET GOOGLE SHEETS
     }).then((signUpArr) => {
         fetch(`${baseURL}${sheet_id}?key=${GOOGLE_API_KEY}&includeGridData=true`).then((data) => { return data.json() }).then((data) => {
-            console.log(`google sheets`);
-            console.log(data);
+            // console.log(`google sheets`);
+            // console.log(data);
 
             data.sheets.map((val, i) => {
                 var obj = {
@@ -165,18 +170,25 @@ $(document).ready(function () {
 
                     val.signUps.map((arr, j) => {
                         var thisEmail = arr.email.toLowerCase();
+                        var thisPhone = arr.phone;
+                        if(thisPhone == undefined){
+                            thisPhone = ``;
+                        }
                         if (thisEmail == theEmail1 || thisEmail == theEmail2) {
                             var elem = `<li>
                         <a href="${theEventURL}" target="_blank">
                             <img src="${theEventImg}" alt="${theEvent}">
-                            <h3>${theEvent}</h3>
+                            <h3 class="event-title">${theEvent}</h3>
                         </a>
                         <h4>Email: ${arr.email}</h4>
                         <h4>Name: ${arr.firstname} ${arr.lastname}</h4>
-                        <h4>Amount Paid: ${arr.amountpaid}</h4>
-                        <h4>Item: ${arr.item}</h4>
+                        <h4>Phone: ${thisPhone}</h4>
+                        <!--<h4>Amount Paid: ${arr.amountpaid}</h4>-->
+                        <h4 class="item">Item: ${arr.item}</h4>
+                        <h4 class="location">Location: ${arr.location}</h4>
+                        <h4>Qty: ${arr.qty}</h4>
                         <h4>Comments: ${arr.comments}</h4>
-                        <h4>Phone: ${arr.phone}</h4>
+                        
                         <!-- <h4>Child: ${arr.kidname}</h4>
                         <h4>Grade: ${arr.grade}</h4>
                         <h4>Date: ${arr.date}</h4> -->
@@ -237,6 +249,30 @@ $(document).ready(function () {
                         $(titles[i]).closest('li').addClass('duplicate');
                     }
                 }
+
+
+                //! add up total points
+                var locationsArr = $('.location');
+                var itemsArr = $('.item');
+                console.log(locationsArr, itemsArr);
+                var pointsCount = [];
+                locationsArr.map((i, val) => {
+                    // console.log(val);
+                    console.log(val.textContent);
+                    if(val.textContent.indexOf('pts') !== -1){
+                        pointsCount.push(val.textContent);
+                    }
+                });
+
+                itemsArr.map((i, val) => {
+                    // console.log(val);
+                    console.log(val.textContent);
+                    if(val.textContent.indexOf('pts') !== -1){
+                        pointsCount.push(val.textContent);
+                    }
+                });
+                console.log(`pointsCount`);
+                console.log(pointsCount);
             }
 
 

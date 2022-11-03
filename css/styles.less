@@ -64,8 +64,13 @@ ul {
                 font-size: 5vw;
             }
 
+            &.event-title {
+                text-align: center;
+            }
+
             font-size: 1vw;
             font-weight: bold;
+
         }
 
         h4 {
@@ -162,8 +167,9 @@ header {
     box-shadow: 0 0 15px rgba(0, 0, 0, .5);
     margin: 4vw auto;
 
-    .the-form, .the-error {
-        display:none;
+    .the-form,
+    .the-error {
+        display: none;
     }
 
     h1 {
@@ -284,6 +290,16 @@ header {
         }
     }
 
+}
+
+.the-points {
+    @media screen and (max-width: 428px) {
+        text-align: center;
+        margin: 7vw 0 !important;
+    }
+
+    text-align: right;
+    display:none;
 }
 
 .error-message {
