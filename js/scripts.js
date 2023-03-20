@@ -171,7 +171,7 @@ $(document).ready(function () {
                     val.signUps.map((arr, j) => {
                         var thisEmail = arr.email.toLowerCase();
                         var thisPhone = arr.phone;
-                        if(thisPhone == undefined){
+                        if (thisPhone == undefined) {
                             thisPhone = ``;
                         }
                         if (thisEmail == theEmail1 || thisEmail == theEmail2) {
@@ -256,10 +256,10 @@ $(document).ready(function () {
                 var itemsArr = $('.item');
                 console.log(locationsArr, itemsArr);
                 var pointsCount = [];
-                locationsArr.map((i, val) => {
+                itemsArr.map((i, val) => {
                     // console.log(val);
                     console.log(val.textContent);
-                    if(val.textContent.indexOf('pts') !== -1){
+                    if (val.textContent.indexOf('pts') !== -1) {
                         pointsCount.push(val.textContent);
                     }
                 });
@@ -267,12 +267,50 @@ $(document).ready(function () {
                 itemsArr.map((i, val) => {
                     // console.log(val);
                     console.log(val.textContent);
-                    if(val.textContent.indexOf('pts') !== -1){
+                    if (val.textContent.indexOf('pts') !== -1) {
                         pointsCount.push(val.textContent);
                     }
                 });
                 console.log(`pointsCount`);
                 console.log(pointsCount);
+
+                //? DEMONSTRATION EMAILS
+                //cherryrose1010@gmail.com
+                //Vph103@yahoo.com
+
+                //? DEMONSTRATION CODE PUT INTO CONSOLE IN BROWSER
+                //? GET THE POINTS
+                
+                var pointsCount = [];
+                var itemsArr =  document.getElementsByClassName('item');
+                for (i = 0; i < itemsArr.length; i++) {
+                    //console.log(itemsArr[i].textContent);
+                    var pts = itemsArr[i].textContent.split(' ');
+                    for (j = 0; j < pts.length; j++) {
+                        //console.log(pts[j]);
+                        if (pts[j].indexOf('pts') !== -1) {
+                            pts = Number(pts[j].split('pts')[0]);
+                            pointsCount.push(pts);
+                        }
+                    }
+                    // console.log(pts);
+                }
+
+                //console.log(pointsCount);
+
+                //? DO THE MATH & ADD THE POINTS
+                var theCount = 0;
+                for (i = 0; i < pointsCount.length; i++) {
+
+                    theCount += pointsCount[i];
+
+                }
+
+                //console.log(theCount);
+                //? DISPLAY THE TOTAL POINTS
+                document.getElementsByClassName('the-points')[0].children[0].innerHTML = theCount;
+                document.getElementsByClassName('the-points')[0].style.display = 'block';
+                
             }
 
 
