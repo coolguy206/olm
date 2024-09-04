@@ -29,9 +29,34 @@ var message = ``;
 $(document).ready(function () {
     console.log(`page ready`);
 
+    var currentYear = new Date().getFullYear();
+    var otherYear = ``;
+    var currentMonth = new Date().getMonth();
+
+    var span1Year = ``;
+    var span2Year = ``;
+
+    //? FOR TEST YEAR AND MONTH
+    // var currentYear = 2024;
+    // var currentMonth = 1;
+    
+    if(currentMonth > 7){
+        otherYear = currentYear + 1;
+        span1Year = currentYear;
+        span2Year = currentYear + 1;
+    } else {
+        otherYear = currentYear - 1;
+        span1Year = currentYear -1;
+        span2Year = currentYear;
+    }
+
+    //? SET THE H1 YEARS
+    $('.year1').text(span1Year);
+    $('.year2').text(span2Year);
+
     var signUpArr = {
         genius: [],
-        google: []
+        // google: []
     };
 
     //? GET SIGNUPS FROM SIGNUP GENIUS
@@ -41,16 +66,20 @@ $(document).ready(function () {
 
         data.data.map((val, i) => {
             // console.log(val);
-            var d = val.startdatestring;
-            d = d.split(` `)[0];
-            // console.log(d);
-            var date = new Date(d).toDateString();
+
+            var startDate = val.startdatestring;
+            startDate = new Date(startDate).toDateString();
+
+            var endDate = val.enddatestring;
+            endDate = new Date(endDate).toDateString();
+
             var obj = {
                 title: val.title,
                 id: val.signupid,
                 url: val.signupurl,
                 img: val.mainimage,
-                date: date
+                startDate: startDate,
+                endDate: endDate,
             }
             signUpArr.genius.push(obj);
             // console.log(obj);
@@ -64,7 +93,11 @@ $(document).ready(function () {
     }).then((signUpArr) => {
         signUpArr.genius.map((val, i) => {
             fetch(`${sGBaseURL}${sGReports}${val.id}/${SIGNUP_GENIUS_KEY}`).then((data) => { return data.json() }).then((data) => {
-                console.log(val.title);
+                // console.log(val.startDate);
+                // console.log(val.endDate);
+                var start = new Date(val.startDate).toDateString();
+                var end = new Date(val.endDate).toDateString();
+                console.log(`${val.title} ${start} - ${end}`);
                 console.log(`count: ${data.data.signup.length}`)
                 // console.log(`reports`);
                 console.log(data);
@@ -100,9 +133,12 @@ $(document).ready(function () {
         });
 
         return signUpArr;
+ 
+    })
 
-        //? GET GOOGLE SHEETS
-    }).then((signUpArr) => {
+/*    
+    //? GET GOOGLE SHEETS
+    .then((signUpArr) => {
         fetch(`${baseURL}${sheet_id}?key=${GOOGLE_API_KEY}&includeGridData=true`).then((data) => { return data.json() }).then((data) => {
             // console.log(`google sheets`);
             // console.log(data);
@@ -140,9 +176,14 @@ $(document).ready(function () {
 
         return signUpArr;
 
-    }).then((signUpArr) => {
+    })
+*/
+
+    .then((signUpArr) => {
+        
+        console.log(`sign up genius data ready to find by emails`);
         console.log(signUpArr);
-        console.log(`all good`);
+
         $(`.the-form`).show();
 
         $('form').on('submit', function (e) {
@@ -163,9 +204,16 @@ $(document).ready(function () {
 
                 //?execute the loop
                 signUpArr.genius.map((val, i) => {
+                    var theEventYear = val.endDate;
+                    theEventYear = theEventYear.split(' ')[3];
+                    // console.log(theEventYear);
+
+                    if(currentYear == theEventYear || otherYear == theEventYear){
+
                     var theEvent = val.title;
                     var theEventURL = val.url;
-                    var theEventDate = val.date;
+                    var theEventStartDate = val.startDate;
+                    var theEventEndDate = val.endDate;
                     var theEventImg = val.img;
 
                     val.signUps.map((arr, j) => {
@@ -180,6 +228,7 @@ $(document).ready(function () {
                             <img src="${theEventImg}" alt="${theEvent}">
                             <h3 class="event-title">${theEvent}</h3>
                         </a>
+                        <h4>Date: ${theEventStartDate} - ${theEventEndDate}</h4>
                         <h4>Email: ${arr.email}</h4>
                         <h4>Name: ${arr.firstname} ${arr.lastname}</h4>
                         <h4>Phone: ${thisPhone}</h4>
@@ -197,8 +246,10 @@ $(document).ready(function () {
                             message += elem;
                         }
                     });
+                }
                 });
 
+/*
                 signUpArr.google.map((val, i) => {
                     var theEvent = val.title;
                     val.signUps.map((arr, j) => {
@@ -221,6 +272,7 @@ $(document).ready(function () {
                         }
                     });
                 })
+*/
 
                 //!clear all previous submissions
                 $('ul').empty();
@@ -250,7 +302,7 @@ $(document).ready(function () {
                     }
                 }
 
-
+/*
                 //! add up total points
                 var locationsArr = $('.location');
                 var itemsArr = $('.item');
@@ -310,6 +362,7 @@ $(document).ready(function () {
                 //? DISPLAY THE TOTAL POINTS
                 document.getElementsByClassName('the-points')[0].children[0].innerHTML = theCount;
                 document.getElementsByClassName('the-points')[0].style.display = 'block';
+*/              
                 
             }
 

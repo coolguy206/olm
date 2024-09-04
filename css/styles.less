@@ -12,16 +12,22 @@ h4 {
     font-weight: 400;
     font-variant: small-caps;
     text-transform: capitalize;
-    margin: 0 0 1vw;
+    margin: 0 0 2vw;
 }
 
 
 
 ul {
-    @media screen and (max-width:428px) {
+    @media screen and (max-width: 835px) {
+        gap: 4vw;
+    }
+    @media screen and (max-width:430px) {
         margin: 4vw 0 0;
         gap: 4vw;
         padding: 4vw 0 0;
+    }
+    @media screen and (max-width:376px) {
+        gap: 8vw;
     }
 
     margin: 1vw 0;
@@ -32,14 +38,20 @@ ul {
     border-top: 2px solid #aaabad;
     padding: 1vw 0 0;
     display:none;
+    justify-content: center;
 
     li {
-        @media screen and (max-width: 810px) {
+        @media screen and (max-width: 1025px) {
             flex-basis: 49%;
         }
 
-        @media screen and (max-width: 428px) {
+        @media screen and (max-width: 835px) {
             flex-basis: 100%;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 430px) {
+            // flex-basis: 100%;
             padding: 6vw;
         }
 
@@ -56,12 +68,16 @@ ul {
                 font-size: 1.5vw;
             }
 
-            @media screen and (max-width: 810px) {
+            @media screen and (max-width: 1025px) {
                 font-size: 2.5vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 430px) {
                 font-size: 5vw;
+            }
+
+            @media screen and (max-width: 376px) {
+                font-size: 10vw;
             }
 
             &.event-title {
@@ -75,15 +91,19 @@ ul {
 
         h4 {
             @media screen and (max-width:1680px) {
-                font-size: 1vw;
+                font-size: 1.5vw;
             }
 
-            @media screen and (max-width: 810px) {
+            @media screen and (max-width: 835px) {
                 font-size: 2vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 430px) {
                 font-size: 4vw;
+            }
+
+            @media screen and (max-width: 376px) {
+                font-size: 5vw;
             }
 
             font-size: .7vw;
@@ -92,14 +112,13 @@ ul {
 }
 
 header {
-    @media screen and (max-width:428px) {
+    @media screen and (max-width:430px) {
         background: linear-gradient(to right, #cc2830, #ff323c, #CC2831);
         padding: 7vw;
     }
 
     position: relative;
-    background: url(https://www.olmbulldogs.com/pics/watermark.png) no-repeat 60vw 0,
-    linear-gradient(to right, #cc2830, #ff323c, #CC2831);
+    background: linear-gradient(to right, #cc2830, #ff323c, #CC2831);
     padding: 1vw;
     border-bottom: 8px #c0252d solid;
 
@@ -108,11 +127,11 @@ header {
             max-width: 60vw;
         }
 
-        @media screen and (max-width: 810px) {
+        @media screen and (max-width: 835px) {
             max-width: 90vw;
         }
 
-        @media screen and (max-width:428px) {
+        @media screen and (max-width:430px) {
             display: block;
             text-align: center;
         }
@@ -124,7 +143,7 @@ header {
         gap: 1vw;
 
         img {
-            @media screen and (max-width:428px) {
+            @media screen and (max-width:430px) {
                 width: 40vw;
             }
         }
@@ -134,11 +153,15 @@ header {
                 font-size: 2.5vw;
             }
 
-            @media screen and (max-width: 810px) {
-                font-size: 5vw;
+            @media screen and (max-width: 1025px) {
+                font-size:7.5vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 835px) {
+                font-size:9.5vw;
+            }
+
+            @media screen and (max-width: 430px) {
                 font-size: 7vw;
             }
 
@@ -157,7 +180,7 @@ header {
         max-width: 90vw;
     }
 
-    @media screen and (max-width: 428px) {
+    @media screen and (max-width: 430px) {
         max-width: 100%;
         box-shadow: none;
     }
@@ -177,13 +200,14 @@ header {
             font-size: 2.5vw;
         }
 
-        @media screen and (max-width: 810px) {
+        @media screen and (max-width: 1025px) {
             font-size: 5vw;
         }
 
-        @media screen and (max-width: 428px) {
-            font-size: 6vw;
+        @media screen and (max-width: 430px) {
+            font-size: 8vw;
             margin: 0 0 4vw;
+            text-align: center;
         }
 
         font-size: 1.7vw;
@@ -199,11 +223,11 @@ header {
             font-size: 1.5vw;
         }
 
-        @media screen and (max-width: 810px) {
-            font-size: 3vw;
+        @media screen and (max-width: 1025px) {
+            font-size: 2.5vw;
         }
 
-        @media screen and (max-width: 428px) {
+        @media screen and (max-width: 430px) {
             font-size: 5vw;
             margin: 0 0 4vw;
         }
@@ -221,11 +245,11 @@ header {
                 font-size: 1vw;
             }
 
-            @media screen and (max-width: 810px) {
+            @media screen and (max-width: 1025px) {
                 font-size: 2vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 430px) {
                 font-size: 4vw;
             }
 
@@ -240,13 +264,13 @@ header {
                 height: 3vw;
             }
 
-            @media screen and (max-width: 810px) {
-                width: 43vw;
-                height: 7vw;
-                margin: 0 0 2vw;
+            @media screen and (max-width: 1025px) {
+                width: 36vw;
+                height: 5vw;
+                margin: 0 0 3vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 430px) {
                 width: 91vw;
                 height: 12vw;
                 margin: 0 0 4vw;
@@ -263,11 +287,11 @@ header {
                 font-size: 1.5vw;
             }
 
-            @media screen and (max-width: 810px) {
-                font-size: 3vw;
+            @media screen and (max-width: 1025px) {
+                font-size: 2.5vw;
             }
 
-            @media screen and (max-width: 428px) {
+            @media screen and (max-width: 430px) {
                 font-size: 6vw;
             }
 
@@ -293,7 +317,7 @@ header {
 }
 
 .the-points {
-    @media screen and (max-width: 428px) {
+    @media screen and (max-width: 430px) {
         text-align: center;
         margin: 7vw 0 !important;
     }
